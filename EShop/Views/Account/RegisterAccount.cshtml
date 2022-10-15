@@ -1,0 +1,101 @@
+﻿@model EShop.Models.AccountViewModel
+
+@{
+	ViewData["Title"] = "ثبت نام";
+}
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+		  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+		  crossorigin="anonymous" />
+
+</head>
+<body>
+	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.min.js"
+			integrity="sha384-VmD+lKnI0Y4FPvr6hvZRw6xvdt/QZoNHQ4h5k0RL30aGkR9ylHU56BzrE2UoohWK"
+			crossorigin="anonymous">
+	</script>
+	<h2>ثبت نام</h2>
+	<hr />
+	<div class="align-items-center justify-content-center col-sm-12">
+		<form asp-action="RegisterAccount">
+
+
+			<div class="card">
+				<h5 class="card-header alert-primary"> ثبت نام</h5>
+				<div class="card-body">
+					<div class="card-title control-label">
+						<div class="row">
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<div class="form-group col-md-6">
+								<label asp-for="Name" class="control-label"></label>
+								<input asp-for="Name" class="form-control" placeholder="*" />
+								<span asp-validation-for="Name" class="text-danger"></span>
+							</div>
+							@if (Model != null)
+							{
+								if (String.IsNullOrWhiteSpace(Model.Email))
+								{
+									<div class="form-group col-md-6">
+										<label asp-for="Email" class="control-label"></label>
+										<input asp-for="Email" class="form-control" placeholder="example@gmail.com" />
+										<span asp-validation-for="Email" class="text-danger"></span>
+									</div>
+								}else{
+										<input asp-for="Email" class="form-control" type="hidden" placeholder="example@gmail.com" />
+								}
+							}
+
+
+							@if (Model != null)
+							{
+								if (String.IsNullOrWhiteSpace(Model.Phone))
+								{
+									<div class="form-group col-md-6">
+										<label asp-for="Phone" class="control-label"></label>
+										<input asp-for="Phone" class="form-control" placeholder="* مثال: 09012345678" />
+										<span asp-validation-for="Phone" class="text-danger"></span>
+									</div>
+								}else
+								{
+									<input asp-for="Phone" class="form-control" type="hidden"/>
+								}
+							}
+
+							<div class="form-group col-md-6">
+								<label asp-for="Password" class="control-label"></label>
+								<input asp-for="Password" type="password" class="form-control" />
+								<span asp-validation-for="Password" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label asp-for="RePassword" class="control-label"></label>
+								<input asp-for="RePassword" type="password" class="form-control" />
+								<span asp-validation-for="RePassword" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<input type="submit" value="ثبت نام" class="btn btn-primary btn-block" />
+							</div>
+
+							<div class="form-group col-md-3">
+								<a class="btn btn-outline-secondary btn-block" asp-action="Index" asp-controller="Home">بازگشت</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	@section Scripts{
+		<partial name="_ValidationScriptsPartial.cshtml" />
+	}
+
+	</body>
+	</html>

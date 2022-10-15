@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+		  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+		  crossorigin="anonymous" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	<title>@ViewData["Title"]</title>
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.min.js" integrity="sha384-VmD+lKnI0Y4FPvr6hvZRw6xvdt/QZoNHQ4h5k0RL30aGkR9ylHU56BzrE2UoohWK" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+	<header id="header">
+		<nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-toggleable-sm border-bottom mb-3 fixed-top" style="font-weight:bold;">
+			<div class="container">
+				<a class="navbar-brand text-light align-text-bottom " style="margin-top:7px" asp-area="" asp-controller="Home" asp-action="Index">فروشگاه آنلاین</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-light align-text-bottom" href="/Admin">لیست محصولات</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-light align-text-bottom" asp-page="AddProduct">محصول جدید</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-light align-text-bottom" href="/Admin/UserList">لیست کاربران</a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+	</header>
+
+
+	<div class="container box-shadow" style="margin-top:60px">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

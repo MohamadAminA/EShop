@@ -1,0 +1,60 @@
+﻿@{
+	ViewData["Title"] = "تماس با ما";
+}
+<div class="row">
+	<div class="col-lg-7 col-xl-8">
+		<div class="form_grid">
+			<h4 class="mb-5"> فرم تماس با ما </h4>
+			<p>
+				شما از طریق این صفحه می‌توانید با ما ارتباط برقرار کنید. همچنین می‌توانید انتقادات و
+				پیشنهادات خود را در حوزه‌ی خدماتی ما، از طریق این بخش به ما منتقل کنید.
+			</p>
+			<form method="post" class="wpcf7-form" autocomplete="off" action="@*/Contactus*@">
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" class="form-control required" placeholder="*نام و نام خانوادگی" id="FullName" name="FullName" value="">
+							<span class="text text-danger field-validation-valid" data-valmsg-for="FullName" data-valmsg-replace="true"></span>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<input class="form-control required" name="Mobile" type="number" placeholder="شماره موبایل" data-val="true" data-val-required="The Mobile field is required." id="Mobile" value="">
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+
+							<input type="text" placeholder="*موضوع" class="form-control required" data-val="true" data-val-maxlength="عنوان نمیتواند بیشتر از 100 کاراکتر یاشد" data-val-maxlength-max="100" data-val-required="لطفا عنوان را وارد کنید" id="Title" maxlength="100" name="Title" value="">
+							<span class="text text-danger field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-group">
+
+							<textarea type="text" class="form-control required" placeholder="*متن پیام" data-val="true" data-val-maxlength="متن نمیتواند بیشتر از 700 کاراکتر یاشد" data-val-maxlength-max="700" data-val-required="لطفا متن پیام را وارد کنید" id="Description" maxlength="700" name="Description"></textarea>
+							<span class="text text-danger field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+						</div>
+						<div class="form-group mb0">
+							<button type="submit" class="btn btn-lg btn-danger">ارسال پیام</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="col-lg-5 col-xl-4" style="margin-top: 4%">
+
+		<div class="card" @*style="width: 18rem;"*@>
+			<div class="card-header">
+				تماس با ما
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><strong>آدرس :‌</strong><br />تهران، استاد مطهری، خیابان اورامان، پلاک 28، طبقه1، واحد 2 </li>
+				<li class="list-group-item"><strong>تلفن : </strong>02191072777</li>
+			</ul>
+		</div>
+	</div>
+</div>

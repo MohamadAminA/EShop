@@ -1,0 +1,19 @@
+﻿@model Product
+
+<div class="col-md-4 col-sm-6 col-xl-3 col-lg-3" style="margin-top: 2%;">
+	<div class="card img-thumbnail" style="block-size:stretch">
+		<a asp-action="Details" asp-controller="Product" asp-route-id="@Model.Id">
+			<img src="/Resources/@Model.Images.Split(',').FirstOrDefault()" class="card-img-top" alt="@Model.Name" />
+			</a>
+		<div class="card-body">
+			<h5 class="card-title">@(Model.Name)</h5>
+			<p class="card-text">@(Model.Description)</p>
+			<hr />
+			<p class="btn-light font-weight-bold">@(Model.Item.Price.ToPrice()) <sup class="text-muted p-1 font-weight-light">تومان</sup></p>
+			<div class="row">
+			<a asp-action="AddToCart" asp-controller="Product" asp-route-itemId="@Model.Id" style="margin:5px;width:40%" class="btn btn-danger" >خرید</a>
+				<a asp-action="details" asp-controller="Product" asp-route-id="@Model.Id" asp-route-Name="@(Model.Name)" style="margin:5px;width:40%" class="btn btn-primary">جزئیات</a>
+			</div>
+		</div>
+	</div>
+</div>

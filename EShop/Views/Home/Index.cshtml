@@ -1,0 +1,14 @@
+﻿@{
+	ViewData["Title"] = "فروشگاه آنلاین";
+}
+@model IEnumerable<Product>
+<div class="row">
+	<div class="col-lg-3 col-xl-3 col-md-4 col-sm-6" style="margin-top:2%;">
+
+		<partial name="_categoriesSidebarPartial"></partial>
+	</div>
+	@foreach (var productItem in Model)
+	{
+		@(await Component.InvokeAsync("ProductItemComponent",productItem))
+	}
+</div>

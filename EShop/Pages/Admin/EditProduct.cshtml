@@ -1,0 +1,72 @@
+﻿@page
+@model EShop.Pages.Admin.EditProductModel
+@inject EShop.Data.Repositories.ICategories _categories
+@{
+}
+<h1>ویرایش محصول</h1>
+<div class="col-md-12">
+	<form method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<input asp-for="Product.Id" type="hidden" class="form-control" />
+
+			<div class="form-group col-md-7">
+				<label asp-for="Product.Name" class="control-label"></label>
+				<input asp-for="Product.Name" class="form-control" placeholder="*" />
+				<span asp-validation-for="Product.Name" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-5">
+				<label asp-for="Product.QuantityInStock" class="control-label"></label>
+				<input asp-for="Product.QuantityInStock" class="form-control" placeholder="*" />
+				<span asp-validation-for="Product.QuantityInStock" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-12">
+				<label asp-for="Product.Description" class="control-label"></label>
+				<textarea asp-for="Product.Description" class="form-control" style="min-height:30px ; max-height:200px"></textarea>
+				<span asp-validation-for="Product.Description" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label asp-for="Product.Discount" class="control-label"></label>
+				<input asp-for="Product.Discount" class="form-control" placeholder="* بدون تخفیف = 0 %" />
+				<span asp-validation-for="Product.Discount" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-6">
+				<label asp-for="Product.Price" class="control-label"></label>
+				<input asp-for="Product.Price" class="form-control" placeholder="*" />
+				<span asp-validation-for="Product.Price" class="text-danger"></span>
+			</div>
+
+
+			<div class="form-group col-md-6">
+				<label asp-for="Product.Image0" class="control-label"></label>
+				<input asp-for="Product.Image0" class="form-control" />
+				<span asp-validation-for="Product.Image0" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				@foreach (var CategoryItem in _categories.AllCategories())
+				{
+					<input type="checkbox" value="@CategoryItem.Id" @((Model.Product.Categories.Any(n=>n.Id==CategoryItem.Id)?"checked":"")) name="CategoriesId" />
+
+					@(CategoryItem.Name)
+				}
+			</div>
+		</div>
+		<div class="row">
+			@foreach (var Image in Model.Product.Image1)
+			{
+				@if (!string.IsNullOrWhiteSpace(Image))
+				{
+					<div class="col-md-4 col-sm-6">
+						<img src="/Resources/@(Image)" class="card-img-top" alt="@(Model.Product.Name)" style="height:80%;width:100%">
+					</div>
+				}
+			}	
+		</div>
+		<div class="form-group col-md-6 col-lg-5 col-xl-5 row">
+			<input type="submit" value="ثبت محصول" class="btn btn-primary btn-block" />
+		</div>
+
+	</form>
+</div>

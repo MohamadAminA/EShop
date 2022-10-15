@@ -1,0 +1,179 @@
+﻿@using EShop.Models.ViewModel
+@model SuccessViewModel
+@{
+	ViewData["Title"] = "پرداخت";
+}
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+		  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+		  crossorigin="anonymous" />
+
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+	@if (ViewBag.PaymentResult.IsCompletedSuccessfully)
+	{
+		<!-- Modal -->
+		<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header alert-success">
+						<h5 class="modal-title" id="exampleModalLabel">پرداخت با موفقیت انجام شد</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p class="h6"><strong>@(User.Identity.Name) عزیز</strong><br />پرداخت شما دریافت شد و پس از آماده سازی در اولین فرصت توسط تیم ایشاپ ارسال می شود <br />از انتخاب شما سپاس گذاریم .</p>
+					</div>
+					<div class="modal-footer">
+						<a data-dismiss="modal" class="btn btn-primary">جزییات پرداخت</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function () {
+				setTimeout(function () { $('#exampleModal').modal('show'); setTimeout(function () { $('#exampleModal').modal('hide'); }, 10000); }, 500);
+			});
+		</script>
+		<div class="alert alert-success text-success">
+			<h3>عملیات با موفقیت انجام شد</h3>
+		</div>
+
+
+		<div class="card border-info mb-3" style="max-width:100%; align-self:center;text-align:center">
+			<div class="card-header  h3 font-weight-bolder">جزییات پرداخت</div>
+			<div class="card-body text-info">
+				<h5 class="card-title" style="margin:20px">
+					<strong>@(User.Identity.Name) عزیز</strong>
+					پرداخت شما به مبلغ @(ViewBag.Amount) <small class="font-weight-light"><sup>تومان</sup></small> با موفقیت انجام شد
+				</h5>
+			</div>
+			<div class="h6 list-group" >
+				<ul>
+					<li class="list-group-item" >
+						قیمت : @(ViewBag.Amount) <small class="font-weight-light"><sup>تومان</sup></small>
+					</li>
+					<li class="list-group-item" >
+						کد پیگیری تراکنش : @(ViewBag.PaymentResult.Result.RefId)
+
+					</li>
+					<li class="list-group-item" >
+						کد پیگیری سبد خرید : @(ViewBag.CartId)
+					</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+	}
+	else
+	{
+		<!-- Modal -->
+		<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header alert-danger">
+						<h5 class="modal-title" id="exampleModalLabel">عملیات با شکست مواجه شد</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>
+							عملیات پرداخت با شکست مواجه شد لطفا پس از چند دقیقه مجددا تلاش فرمایید <br />
+							در صورت کسر شدن وجه تا حداکثر ۷۲ ساعت به حساب شما بازگردانده می شود
+						</p>
+					</div>
+					<div class="modal-footer">
+						<a href="/Home/Index" class="btn btn-outline-secondary">صفحه اصلی</a>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">جزییات</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$(document).ready(function () {
+				setTimeout(function () { $('#exampleModal').modal('show'); setTimeout(function () { $('#exampleModal').modal('hide'); }, 10000); }, 500);
+			});
+		</script>
+
+
+
+		<div class="card border-warning mb-3" style="max-width:100%; align-self:center;text-align:center">
+			<div class="card-header h3 font-weight-bolder">جزییات پرداخت</div>
+			<div class="card-body text-info">
+				<h5 class="card-title" style="margin:20px">
+					<strong>@(User.Identity.Name) عزیز</strong>
+					فرآیند پرداخت با شکست مواجه شد لطفا دقایقی دیگر مجددا تلاش نمایید
+				</h5>
+			</div>
+			<p class="h6" style="margin:20px">
+				درصورت کسر شدن وجه از حساب شما حداکثر تا ۷۲ ساعت بازگردانده می شود<br />
+				درصورت بروز مشکل می توانید با پشتیبانی سایت تماس بگیرید<br />
+				<a href="/ContactUs" class="btn btn-outline-secondary">پشتیبانی</a>
+
+			</p>
+			<div class="h6 list-group" style="margin:20px">
+				<ul>
+					<li class="list-group-item" style="margin:5px 5px 0px 5px">
+						قیمت : @(ViewBag.Amount) <small class="font-weight-light"><sup>تومان</sup></small>
+					</li>
+					<li class="list-group-item" style="margin:0px 5px">
+						کد پیگیری تراکنش : @(ViewBag.PaymentResult.Result.RefId)
+
+					</li>
+					<li class="list-group-item" style="margin:0px 5px 5px 5px">
+						کد پیگیری سبد خرید : @(ViewBag.CartId)
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		
+
+
+
+		<div class="h6">
+			<ul>
+				<li>
+					<strong>@(User.Identity.Name) عزیز</strong>
+					فرآیند پرداخت با شکست مواجه شد لطفا دقایقی دیگر مجددا تلاش نمایید<br />
+					درصورت کسر شدن وجه از حساب شما حداکثر تا ۷۲ ساعت بازگردانده می شود<br />
+					درصورت بروز مشکل می توانید با پشتیبانی سایت تماس بگیرید
+					<a href="/ContactUs" class="btn btn-outline-secondary">پشتیبانی</a>
+				</li>
+				<li>
+					کد پیگیری تراکنش : @(ViewBag.PaymentResult.Result.RefId)
+
+				</li>
+				<li>
+					کد پیگیری سبد خرید @(ViewBag.CartId)
+				</li>
+			</ul>
+		</div>
+
+	}
+
+
+
+
+
+</body>
+</html>
+
+

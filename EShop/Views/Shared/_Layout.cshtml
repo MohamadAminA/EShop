@@ -1,0 +1,89 @@
+﻿@using System.Security.Claims
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+		  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+		  crossorigin="anonymous" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	<title>@ViewData["Title"]</title>
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.min.js" integrity="sha384-VmD+lKnI0Y4FPvr6hvZRw6xvdt/QZoNHQ4h5k0RL30aGkR9ylHU56BzrE2UoohWK" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+	<header id="header">
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom mb-3" style="background-image: url(/Resources/EShop.jpg);background-size:inherit;background-position:top;background-repeat:no-repeat; height:250px ; font-weight:bold;">
+			<div class="container" style="padding:0px 0px 100px 0px">
+				<a class="navbar-brand text-light align-text-bottom " asp-area="" asp-controller="Home" asp-action="Index">فروشگاه آنلاین</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-light align-text-bottom" asp-area="" asp-controller="Home" asp-action="Index">خانه</a>
+						</li>
+
+						<li>
+							<partial name="_categoriesDropDownPartial" />
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-light align-text-bottom" asp-area="" asp-controller="Home" asp-action="AboutUs">درباره ما</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-light align-text-bottom" asp-area="" asp-controller="Home" asp-action="ContactUs">تماس با ما</a>
+						</li>
+						@if (User.Identity.IsAuthenticated)
+						{
+							<li class="nav-item">
+								<partial name="_UserDropdownPartial" />
+							</li>
+						}
+						else
+						{
+							<li class="nav-item">
+								<a class="nav-link text-light align-text-bottom" asp-area="" asp-controller="Account" asp-action="EnterAccount">ورود/ثبت نام</a>
+							</li>
+
+						}
+						@if(User.Identity.IsAuthenticated){
+							if(bool.Parse(User.FindFirstValue("IsAdmin")) == true){
+								<li class="nav-item">
+									<a class="nav-link text-light align-text-bottom"  href="/Admin" >پنل ادمین</a>
+								</li>
+							}
+						}
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container box-shadow">
+		<main role="main" class="pb-3">
+
+			@RenderBody()
+
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted align-bottom">
+		<a class="nav-link text-dark" href="#header">برو بالا</a>
+		<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">تماس با ما</a>
+		<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">درباره ما</a>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

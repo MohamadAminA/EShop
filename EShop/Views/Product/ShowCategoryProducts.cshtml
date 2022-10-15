@@ -1,0 +1,23 @@
+﻿@model Category
+@{
+	ViewData["Title"] = Model.Name;
+}
+<div class="row">
+
+	<div class="col-12" style="margin-top: 2%;">
+		<h4 class="font-weight-bolder h4" style="color:dimgray">دسته بندی : @(Model.Name)<br /></h4>
+
+		<p class="font-weight-normal text-muted">@(Model.Description)<br /></p>
+		<hr />
+	</div>
+
+	<div class="col-lg-3 col-xl-3 col-md-4 col-sm-6" style="margin-top:2%;">
+		<partial name="_categoriesSidebarPartial" />
+	</div>
+
+
+	@foreach (var Item in Model.Items)
+	{
+		@(await Component.InvokeAsync("ProductItemComponent",Item.Product))
+	}
+</div>

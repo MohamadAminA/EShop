@@ -1,0 +1,30 @@
+﻿@using EShop.Data.Repositories
+@inject ICategories _Categories;
+
+
+<head>
+	<style>
+		.dropdown:hover .dropdown-menu {
+			display: block;
+			margin-top: 0;
+		}
+	</style>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<div class="dropdown">
+	<button class="orangeHover btn text-light font-weight-bold align-text-bottom dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+		دسته بندی
+	</button>
+	<div class="dropdown-menu">
+		@foreach (var CategoryItem in _Categories.CategoryVMforShow())
+		{
+			<a type="button" href="~/Category/@(CategoryItem.Id)/@(CategoryItem.Name)" class="dropdown-item" data-toggle="tooltip" data-placement="right" title="@CategoryItem.Description">
+				@CategoryItem.Name
+				<span class="badge badge-primary badge-pill">@CategoryItem.Count</span>
+			</a>
+		}
+	</div>
+</div>

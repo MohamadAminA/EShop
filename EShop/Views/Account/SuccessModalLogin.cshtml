@@ -1,0 +1,101 @@
+﻿@using EShop.Models.ViewModel
+@model SuccessViewModel
+@{
+	ViewData["Title"] = "تبریک !";
+}
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+		  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+		  crossorigin="anonymous" />
+
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js" integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+	@*Logined successfully Modal*@
+	@if (Model != null)
+	{
+		if (Model.IsCalledByLogin == false)
+		{
+			<script>
+				$(document).ready(function () {
+					setTimeout(function () { $('#exampleModal').modal('show'); setTimeout(function () { $('#exampleModal').modal('hide'); location.replace("/Home/Index"); }, 10000); }, 500);
+				});
+			</script>
+		}
+	}
+
+
+	<!-- Modal -->
+	<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header alert-success">
+					<h5 class="modal-title" id="exampleModalLabel">با موفقیت وارد شدید</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="h6">سلام <strong>@(Model.Name)</strong><br />به وبسایت ایشاپ خوش آمدید . از این پس میتوانید به راحتی به خرید خود ادامه دهید .</p>
+				</div>
+				<div class="modal-footer">
+					<a href="/Home/Index" class="btn btn-outline-primary">فهمیدم</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	@*Registered successfully Modal*@
+	@if (Model != null)
+	{
+		if (Model.IsCalledByLogin == false)
+		{
+			<script>
+				$(document).ready(function () {
+					setTimeout(function () { $('#exampleModal').modal('show'); setTimeout(function () { $('#exampleModal').modal('hide'); }, 10000); }, 500);
+				});
+			</script>
+		}
+	}
+
+	<!-- Modal -->
+	<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header alert-success">
+					<h5 class="modal-title" id="exampleModalLabel">ثبت نام با موفقیت انجام شد</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>
+						سلام <strong>@(Model.Name)</strong><br />
+						تبریک میگم ! شما با موفقیت به خانواده بزرگ ایشاپ پیوستید 🤍
+					</p>
+					</div>
+				<div class="modal-footer">
+					<a href="/Home/Index" class="btn btn-outline-secondary">صفحه اصلی</a>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">ورود</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
+
+

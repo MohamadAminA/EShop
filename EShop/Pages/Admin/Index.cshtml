@@ -1,0 +1,62 @@
+﻿@page
+@model EShop.Pages.Admin.IndexModel
+@{
+}
+<div></div>
+<div class="row">
+	<table class="table table-striped">
+		<thead class="btn-dark text-white">
+			<tr>
+				<td><a class="btn btn-outline-dark text-light" asp-page="AddProduct">اضافه کردن محصول</a></td>
+				<td>اسم</td>
+				<td>دسته بندی</td>
+				<td>تعداد</td>
+				<td>قیمت</td>
+				<td>دستورات</td>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var ProductItem in Model.Products)
+			{
+				<tr>
+					<td>
+						<a asp-action="Details" asp-controller="Product" asp-route-id="@ProductItem.Id">
+							<img src="~/Resources/@(ProductItem.Item.Product.Images.Split(',').FirstOrDefault())" alt="@ProductItem.Item.Product.Name" height=100 width=150 />
+						</a>
+					</td>
+					<td>
+						<a asp-controller="Product" asp-action="Details" asp-route-id="@(ProductItem.Item.Id)">
+							<p class="text-decoration-none h6 text-dark">@ProductItem.Item.Product.Name</p>
+						</a>
+					</td>
+					<td>
+						@foreach (var category in ProductItem.Item.Categories)
+						{
+							<a class="text-decoration-none btn btn-primary" style="border-radius:5px;margin:3px;color:white" href="/Category/@(category.Id)/@(category.Name)" data-toggle="tooltip" data-placement="right" title="@category.Description">
+								@(category.Name)
+							</a>
+						}
+					</td>
+					<td>@ProductItem.Item.QuantityInStock</td>
+					<td>
+						<div class="row"><p class="">@ProductItem.Item.GetPriceWithDiscount().ToPrice() </p> <sub class="text-muted" style="white-space:nowrap "> تومان</sub></div>
+						@if (ProductItem.Item.Discount != 0)
+						{
+							<div class="row">
+								<p class="text-secondary text-nowrap text-muted">
+									<del>@ProductItem.Item.Price</del><sub class="text-muted small font-weight-light" style="white-space:nowrap "> تومان</sub>
+								</p>
+							</div>
+							<p class="alert alert-success" style="padding:1px"> تخفیف : @(ProductItem.Item.Discount) %</p>
+						}
+					</td>
+					<td>
+						<a class="btn btn-outline-danger" asp-page="DeleteProduct" asp-route-ProductId="@ProductItem.Id" src="">حذف</a>
+						<a class="btn btn-outline-primary" asp-page="EditProduct" asp-route-ProductId="@ProductItem.Id" src="" >ویرایش</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</div>

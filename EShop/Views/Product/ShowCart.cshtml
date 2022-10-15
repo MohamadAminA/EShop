@@ -1,0 +1,84 @@
+﻿@model CartViewModel
+@{
+	ViewData["Title"] = "سبد خرید";
+	Layout = "_Layout";
+}
+
+@if (Model == null)
+{
+		<div class="row">
+		<table class="table table-striped">
+			<thead class="btn-dark text-white">
+				<tr>
+					<td></td>
+					<td>اسم</td>
+					<td>دسته بندی</td>
+					<td>تعداد</td>
+					<td>قیمت</td>
+					<td></td>
+				</tr>
+			</thead>
+			</table>
+			</div>
+	<div class="row">
+		<div class="alert-info alert text-primary" style="margin:20px">
+			<h5>سبد خرید خالی است</h5>
+		</div>
+		<a href="/" class="btn btn-outline-secondary" style="max-height:50px; align-self:center ;align-content:center ; text-align:center">بازگشت</a>
+	</div>
+}
+else
+{
+	<div class="row">
+		<table class="table table-striped">
+			<thead class="btn-dark text-white">
+				<tr>
+					<td></td>
+					<td>اسم</td>
+					<td>دسته بندی</td>
+					<td>تعداد</td>
+					<td>قیمت</td>
+					<td></td>
+				</tr>
+			</thead>
+			@foreach (var item in Model.CartItems)
+			{
+				<tr>
+					<td>
+						<a asp-controller="Product" asp-action="Details" asp-route-id="@(item.Item.Id)">
+							<img src="~/Resources/@(item.Item.Product.Images.Split(',').FirstOrDefault())" alt="@item.Item.Product.Name" style="border-radius:3px" height=100 width=120 />
+						</a>
+					</td>
+					<td>
+						<a asp-controller="Product" asp-action="Details" asp-route-id="@(item.Item.Id)">
+							<p class="text-decoration-none h6 text-dark">@item.Item.Product.Name</p>
+						</a>
+					</td>
+					<td>
+						@foreach (var category in item.Item.Categories)
+						{
+							<a class="text-decoration-none btn btn-primary" style="border-radius:5px;margin:3px;color:white" href="/Category/@(category.Id)/@(category.Name)" data-toggle="tooltip" data-placement="right" title="@category.Description">
+								@(category.Name)
+							</a>
+						}
+					</td>
+					<td>@item.Quantity</td>
+					<td>@item.GetTotalPriceWithDiscount().ToPrice()</td>
+					<td>
+						<a class="btn btn-danger" asp-action="RemoveFromCart" asp-controller="Product" asp-route-itemId="@item.Item.Id" src="">حذف</a>
+						<a class="btn btn-primary" asp-action="AddToCart" asp-controller="Product" asp-route-itemId="@item.Item.Id" src="">افزودن</a>
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+	<div class="row">
+		<p class="alert-light h4">جمع کل : @(Model.OrderTotaL.ToPrice()) <sup class="text-muted h6">تومان</sup></p>
+	</div>
+	<hr />
+	<div class="row">
+		<a class="btn btn-danger align-middle w-25" asp-action="Payment" asp-controller="Product">ادامه فرایند خرید</a>
+		<a class="btn btn-outline-secondary" style="margin:0px 40px" href="/" >بازگشت</a>
+	</div>
+
+}

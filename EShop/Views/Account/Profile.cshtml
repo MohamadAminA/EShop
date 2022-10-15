@@ -1,0 +1,97 @@
+﻿@model EShop.Models.ProfileViewModel
+
+@{
+	ViewData["Title"] = "ثبت نام";
+}
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+		  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+		  crossorigin="anonymous" />
+
+</head>
+<body>
+	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.min.js"
+			integrity="sha384-VmD+lKnI0Y4FPvr6hvZRw6xvdt/QZoNHQ4h5k0RL30aGkR9ylHU56BzrE2UoohWK"
+			crossorigin="anonymous">
+	</script>
+	<div class="align-items-center justify-content-center col-sm-12">
+		<form asp-action="Profile" enctype="multipart/form-data">
+
+			<div class="card">
+				<h3 class="card-header alert-primary"> ثبت نام</h3>
+				<div class="card-body">
+					<div class="card-title control-label">
+						<div class="row">
+							<div class="form-group col-md-12">
+								@if (!string.IsNullOrWhiteSpace(Model.Image))
+								{
+									<img src="/Resources/@(Model.Image)" style="max-width:100%;height:200px;border-radius:5px" />
+								}
+								else
+								{
+									<img src="/Resources/no-profile-image.gif" style="width:100%;height:200px" />
+								}
+							</div>
+							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+							<div class="form-group col-md-6">
+								<label asp-for="Name" class="control-label"></label>
+								<input asp-for="Name" class="form-control" placeholder="*" />
+								<span asp-validation-for="Name" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label asp-for="Email" class="control-label"></label>
+								<input asp-for="Email" class="form-control" placeholder="example@gmail.com" />
+								<span asp-validation-for="Email" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label asp-for="Phone" class="control-label"></label>
+								<input asp-for="Phone" class="form-control" placeholder="* مثال: 09012345678" />
+								<span asp-validation-for="Phone" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label asp-for="AddImage" class="control-label"></label>
+								<input asp-for="AddImage" class="form-control" placeholder="*" />
+								<span asp-validation-for="AddImage" class="text-danger"></span>
+							</div>
+
+							<div class="form-group col-md-6">
+								<label asp-for="Password" class="control-label"></label>
+								<input asp-for="Password" type="password" class="form-control" />
+								<span asp-validation-for="Password" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label asp-for="RePassword" class="control-label"></label>
+								<input asp-for="RePassword" class="form-control" />
+								<span asp-validation-for="RePassword" class="text-danger"></span>
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<input type="submit" value="ثبت" class="btn btn-primary btn-block" />
+							</div>
+
+							<div class="form-group col-md-3">
+								<a class="btn btn-outline-secondary btn-block" asp-action="Index" asp-controller="Home">بازگشت</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+@section Scripts{
+	<partial name="_ValidationScriptsPartial.cshtml" />
+	}

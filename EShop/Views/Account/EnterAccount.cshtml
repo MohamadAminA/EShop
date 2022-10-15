@@ -1,0 +1,37 @@
+﻿@using EShop.Models.ViewModel
+@model EnterViewModel
+@{
+	ViewData["Title"] = "ورود | ثبت نام";
+}
+
+<div>
+
+	<div class="col-sm-12 d-flex align-items-center justify-content-center">
+		<div class="row">
+			<form asp-action="EnterAccount">
+				@if(User.Identity.IsAuthenticated){
+					<h1 class="alert alert-danger btn-block"><strong>شما اجازه دسترسی به این بخش را ندارید !</strong></h1>
+				}
+				<div class="card" style="margin:10px">
+					<h5 class="card-header alert-primary">ورود | ثبت نام</h5>
+					<div class="card-body">
+						<h5 class="card-title control-label" style="margin-bottom:30px">
+							<br />
+							لطفا شماره موبایل یا ایمیل خود را وارد کنید
+							<br />
+						</h5>
+						<p class="card-text">
+							<div style="margin-bottom:10px;">
+								<input value="" type="text" asp-for="PhoneOrEmail" name="PhoneOrEmail" />
+								<span asp-validation-for="PhoneOrEmail" class="text-danger d-block"></span>
+							</div>
+							<input value="ورود" type="submit" class="btn btn-primary btn-block" formmethod="post" />
+							<span class="text-danger">@Model</span>
+						</p>
+
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

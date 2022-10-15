@@ -1,0 +1,54 @@
+﻿@using EShop.Data.Repositories
+@using System.Security.Claims
+@inject IAccount _account
+@{
+	var UserImg = _account.GetUser(Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))).Image;
+}
+<head>
+	<style>
+		.btn-group:hover .dropdown-menu {
+			display: block;
+			margin-top: 0;
+		}
+
+		.orangeHover:hover {
+			background-color: rgba(254, 162, 0, 0.8);
+		}
+
+		#textgray:hover {
+			color: lightgray;
+		}
+
+		#leftbtn {
+			border-radius: 7px 0px 0px 7px;
+		}
+	</style>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<div class="btn-group" href="/Profile">
+	<a class="orangeHover btn dropdown-toggle-split" style="margin-left:0px;padding-left:1px" data-toggle="dropdown" aria-expanded="false" >
+
+		@if (string.IsNullOrEmpty(UserImg))
+		{
+			<img src="/Resources/no-profile-image.gif" style="height:40px;width:40px;border-radius:15px;" class="" alt="">
+		}
+		else
+		{
+			<img src="/Resources/@(UserImg)" style="height:40px;width:40px;border-radius:15px;" class="" alt="">
+		}
+	
+	</a>
+	<a href="/Profile"  id="leftbtn"  style="margin-right:0px;padding-right:1px" class="orangeHover text-light font-weight-bold align-text-bottom btn">
+		<span id="textgray">@(User.Identity.Name)</span></a>
+
+	<div class="dropdown-menu">
+		<a class="dropdown-item" asp-action="Profile" asp-controller="Account">اطلاعات</a>
+		<a class="dropdown-item" asp-controller="Product" asp-action="ShowCart" asp-route-Name="@(User.Identity.Name)" asp-route-UserId="@(User.Identities.SingleOrDefault(n=>n.AuthenticationType == "NameIdentity"))">سبد خرید</a>
+		<a class="dropdown-item" asp-controller="Product" asp-action="Favorite" asp-route-Name="@(User.Identity.Name)" >مورد علاقه</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item" asp-controller="Account" asp-action="LogoutAccount">خروج</a>
+	</div>
+</div>

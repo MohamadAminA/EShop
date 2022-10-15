@@ -1,0 +1,58 @@
+﻿@page
+@model EShop.Pages.Admin.AddProductModel
+@inject EShop.Data.Repositories.ICategories _categories
+@{
+}
+<h1>محصول جدید</h1>
+<div class="col-md-12">
+	<form method="post" enctype="multipart/form-data">
+		<div class="row">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<div class="form-group col-md-7">
+				<label asp-for="Product.Name" class="control-label"></label>
+				<input asp-for="Product.Name" class="form-control" placeholder="*" />
+				<span asp-validation-for="Product.Name" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-5">
+				<label asp-for="Product.QuantityInStock" class="control-label"></label>
+				<input asp-for="Product.QuantityInStock" class="form-control" placeholder="*" />
+				<span asp-validation-for="Product.QuantityInStock" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-12">
+				<label asp-for="Product.Description" class="control-label"></label>
+				<textarea asp-for="Product.Description" class="form-control" style="min-height:30px ; max-height:200px"></textarea>
+				<span asp-validation-for="Product.Description" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label asp-for="Product.Discount" class="control-label"></label>
+				<input asp-for="Product.Discount" class="form-control" placeholder="* بدون تخفیف = ۰" />
+				<span asp-validation-for="Product.Discount" class="text-danger"></span>
+			</div>
+			<div class="form-group col-md-6">
+				<label asp-for="Product.Price" class="control-label"></label>
+				<input asp-for="Product.Price" class="form-control" placeholder="*" />
+				<span asp-validation-for="Product.Price" class="text-danger"></span>
+			</div>
+
+		</div>
+		<div class="form-group">
+			@foreach (var CategoryItem in _categories.AllCategories())
+			{
+				<input type="checkbox" value="@CategoryItem.Id" formaction="AddProduct" name="CategoriesId" />
+
+				@(CategoryItem.Name)
+			}
+		</div>
+		<div class="form-group col-md-6">
+			<label asp-for="Product.Image0" class="control-label"></label>
+			<input asp-for="Product.Image0" class="form-control" />
+			<span asp-validation-for="Product.Image0" class="text-danger"></span>
+		</div>
+		<div class="form-group col-md-6 col-lg-5 col-xl-5 row">
+			<input type="submit" value="ثبت محصول" class="btn btn-primary btn-block" />
+		</div>
+
+	</form>
+</div>

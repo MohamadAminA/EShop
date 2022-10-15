@@ -1,0 +1,35 @@
+﻿@using EShop.Data.Repositories
+@inject ICategories _categories;
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
+		  href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+		  integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+		  crossorigin="anonymous" />
+
+</head>
+<body>
+	<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.min.js"
+			integrity="sha384-VmD+lKnI0Y4FPvr6hvZRw6xvdt/QZoNHQ4h5k0RL30aGkR9ylHU56BzrE2UoohWK"
+			crossorigin="anonymous">
+	</script>
+	<div>
+
+		<ul class="list-group">
+			@foreach (var CategoryItem in _categories.CategoryVMforShow())
+			{
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<a type="button" class="list-group-item list-group-item-action" href="/Category/@(CategoryItem.Id)/@(CategoryItem.Name)" data-toggle="tooltip" data-placement="right"  title="@CategoryItem.Description">@CategoryItem.Name</a>
+				<span class="badge badge-primary badge-pill">@CategoryItem.Count</span>
+			</li>
+			}
+		</ul>
+	</div>
+
+</body>
+</html>

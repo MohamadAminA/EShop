@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "محصولات موردعلاقه";
+}
+
+<div class="row">
+	<div class="col-lg-3 col-xl-3 col-md-4 col-sm-6" style="margin-top:2%;">
+
+		<partial name="_categoriesSidebarPartial"></partial>
+	</div>
+	@if(Model == null || Model.Count()==0){
+		<div class="row">
+			<div class="alert-info alert text-primary" style="max-height:50px;margin:20px">
+				<h5>سبد خرید خالی است</h5>
+			</div>
+			<a href="/" class="btn btn-outline-secondary" style="max-height:50px;margin:20px;text-align:center">بازگشت</a>
+		</div>
+	}else{
+		@foreach (var productItem in Model)
+		{
+			@(await Component.InvokeAsync("ProductItemComponent", productItem))
+		}
+	}
+
+</div>
